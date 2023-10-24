@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+sys.setrecursionlimit(10**6)
 n = int(input())
 in_out=[]
 in_out = list(map(int,input())) #인덱스 i-1 로 조회
