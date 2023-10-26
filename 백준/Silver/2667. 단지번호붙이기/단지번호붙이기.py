@@ -7,7 +7,7 @@ dx =[-1,1,0,0]
 dy =[0,0,-1,1]
 
 visited=[[0]*n for _ in range(n)]
-count_h=[] 
+home_arr=[] 
 
 home_count=0
 def count_home(x,y):
@@ -23,19 +23,19 @@ def count_home(x,y):
                     count_home(new_x,new_y)
 
 
-ice_count=0
+home_group=0
 for i in range(n):
     for j in range(n):
         if matrix[i][j]!='0' and visited[i][j]==0:
         
             home_count=0
             count_home(i,j)
-            ice_count+=1
-            if home_count==0:
+            home_group+=1
+            if home_count==0: #집이 1칸일때
                 home_count=1
-            count_h.append(home_count)
+            home_arr.append(home_count)
 
-count_h.sort()
-print(ice_count)
-for i in range(len(count_h)):
-    print(count_h[i])  
+home_arr.sort()
+print(home_group)
+for i in range(len(home_arr)):
+    print(home_arr[i])  
