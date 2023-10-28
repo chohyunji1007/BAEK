@@ -1,20 +1,24 @@
+import copy
 import sys
-input = sys.stdin.readline
-n, k = map(int,input().split()) #n 물품의 수 k 준서가 버틸 수 있는 무게
-bag=[[0]*(k+1) for _ in range(n+1)]
-bag_list=[]
-for _ in range(n): 
-    w, v = map(int, input().split()) #w 무게 v 가치
-    bag_list.append([w,v])
+
+n,w = map(int,sys.stdin.readline().split())
+dp = [[0 for _ in range(w+1)]for _ in range(n+1)]
 
 for i in range(1,n+1):
-    for j in range(1,k+1):
-        if j>=bag_list[i-1][0]: #j가 현재 배낭 무게보다 큰 경우
-            if bag[i-1][j-bag_list[i-1][0]]!=0: #0이 아니면!
-                input_w = max(bag[i-1][j], bag[i-1][j-bag_list[i-1][0]]+bag_list[i-1][1])
-                bag[i][j] = input_w
-            else: #0이면
-                bag[i][j]=max(bag_list[i-1][1], bag[i-1][j])
-        else: #j가 현재 배낭 무게보다 작은 경우
-            bag[i][j]=bag[i-1][j]
-print(bag[n][k])
+    weight, cost = map(int,sys.stdin.readline().split())
+    if i == 1: 
+        if weight>w: 
+            continue
+        else:
+            for j in range(weight,w+1): 
+                dp[i][j] = cost
+    else:
+        if weight>w: 
+            dp[i] = copy.deepcopy(dp[i-1])
+        else:
+            for j in range(1,w+1):
+                if weight > j:
+                    dp[i][j] = dp[i-1][j]
+                else:
+                    dp[i][j] = max(dp[i-1][j], cost + dp[i-1][j-weight])
+print(dp[n][w]) 
