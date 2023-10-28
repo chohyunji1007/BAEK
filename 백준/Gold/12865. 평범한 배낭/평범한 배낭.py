@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 n, k = map(int,input().split()) #n 물품의 수 k 준서가 버틸 수 있는 무게
 bag=[[0]*(k+1) for _ in range(n+1)]
 bag_list=[]
