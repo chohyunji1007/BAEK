@@ -20,19 +20,29 @@ function make(a){
     for(var i=0; i<len; i++){
         var fir = a[i];
         for(var j=0; j<len; j++){
-            var second = fir + a[j];
-            arr.push(second);
+            if(i!=j){
+                var second = fir + a[j];
+                arr.push(second);
+            }
+            
             for(var k=0; k<len; k++){
-                var th = second + a[k];
-                arr.push(th);
+                if(j!=k){
+                    var th = second + a[k];
+                    arr.push(th);
+                }
+                
                 for(var q=0; q<len; q++){
-                    var fo = th+a[q];
-                    arr.push(fo);
+                    if(k!=q){
+                        var fo = th+a[q];
+                        arr.push(fo);
+                    }
+                    
                 }
             }
         }
     }
     arr = [... new Set(arr)];
+    console.log(arr);
     return arr;
-    // console.log(arr);
+    
 }
